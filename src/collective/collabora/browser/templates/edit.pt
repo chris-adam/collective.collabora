@@ -3,13 +3,12 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       lang="en"
-      metal:use-macro="context/main_template/macros/master"
       xml:lang="en"
       i18n:domain="plone"
 >
   <body>
 
-    <metal:css fill-slot="style_slot">
+    <!-- <metal:css fill-slot="style_slot">
       <style type="text/css"
              tal:content="view/css_import"
       >
@@ -83,7 +82,12 @@
                  tal:attributes="
                    class python:'section section-collabora-main ' + view.plone_version;
                  "
-        >
+        > -->
+          <a class="btn btn-secondary standalone fullscreen"
+             onclick="collabora_action_fullscreen(); return false;"
+             tal:condition="not: view/iframe_is_cors"
+             i18n:translate=""
+          >Fullscreen</a>
           <iframe id="cool-iframe"
                   allowfullscreen="true"
                   height="100%"
@@ -96,10 +100,15 @@
                     src view/wopi_url;
                   "
           ></iframe>
-        </section>
+          <script type="text/javascript"
+                  tal:attributes="
+                    src python: view.portal_url + '/++resource++collective.collabora/edit.js';
+                  "
+          ></script>
+        <!-- </section>
 
       </metal:block>
-    </metal:main>
+    </metal:main> -->
 
   </body>
 </html>
